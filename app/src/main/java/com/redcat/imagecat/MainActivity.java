@@ -49,6 +49,11 @@ public class MainActivity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 Toast.makeText(MainActivity.this, v.getWidth() + ":" + v.getHeight(), Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, TestActivity.class);
+
+                startActivity(intent);
                 return false;
             }
         });
@@ -66,9 +71,7 @@ public class MainActivity extends Activity {
                 long totalMemory = Runtime.getRuntime().totalMemory() / (1024 * 1024);
                 long freeMemory = Runtime.getRuntime().freeMemory() / (1024 * 1024);
 
-                Log.d("simply", "free memory:" + freeMemory + ",totalMemory:" + totalMemory);
-
-                getmem_SELF();
+                getSelfMemory();
 
                 Toast.makeText(MainActivity.this, totalMem + "MB:" + availMem + "MB", Toast.LENGTH_SHORT).show();
                 return false;
@@ -87,17 +90,12 @@ public class MainActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent();
-//                intent.setClass(MainActivity.this, TestActivity.class);
-//
-//                startActivity(intent);
-
                 clearPreloadedDrawables();
             }
         });
     }
 
-    public long getmem_SELF() {
+    public long getSelfMemory() {
         ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
 
         List<ActivityManager.RunningAppProcessInfo> procInfo = am.getRunningAppProcesses();
@@ -177,7 +175,7 @@ public class MainActivity extends Activity {
                                 dArray[i].clear();
                                 Log.d("simply", "------clear");
 
-                                dArray[i].put(1, createDrawableConstant());
+//                                dArray[i].put(1, createDrawableConstant());
                             }
                         }
                     }
@@ -212,5 +210,6 @@ public class MainActivity extends Activity {
 
         return null;
     }
+
 
 }
